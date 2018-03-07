@@ -1,0 +1,8 @@
+1. mysql 설치
+   - npm install mysql
+
+2. 자연어 설치
+   1. npm install mecab-ya
+   2. node_modules/mecab-ya/bin/install-mecab
+   3. node_modules/mecab-ya/bin/install-mecab ko
+
