@@ -10,7 +10,7 @@ var mecab = require('mecab-ya');
 
 
 router.get("/test", function(req, res) {
-    var text = '애플이 한국어로 뭐야?';
+    var text = '사과가 영어로 뭐야?';
     //var text = "한영사전에서 사과 찾아줘";
     text = text.replace(/ /g, '');
     //NNG+NKS - 매미가

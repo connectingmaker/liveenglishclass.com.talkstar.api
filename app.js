@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 
-
+var crawling = require('./controller/crawling');
 var voice = require('./controller/voice');
 var member = require('./controller/member');
 
@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/voice', voice);
 app.use('/member', member);
+app.use('/crawling', crawling);
 
 process.on('uncaughtException', function(ex) {
   //console.log(ex);
