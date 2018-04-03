@@ -8,6 +8,7 @@ var router = express.Router();
 var mmember = require("../model/mmember");
 
 
+/******* 로그인 ********************************/
 router.post("/loginProcess", function(req, res) {
     var useremail = req.body.useremail;
     var userpwd = req.body.userpwd;
@@ -31,6 +32,8 @@ router.post("/loginProcess", function(req, res) {
     });
 });
 
+
+/******** 회원가입 *********************************/
 router.post("/userJoinSuccess", function(req, res) {
     var email = req.body.email;
     var username = req.body.username;
@@ -83,6 +86,18 @@ router.post("/userJoinSuccess", function(req, res) {
         }
     });
 
+});
+
+
+/********* 이용약관 *************************/
+router.get("/agree", function(req, res) {
+    res.render("member/agree");
+});
+
+
+/******** 개인정보 취급방침 ********************/
+router.get("/privacy", function(req, res) {
+    res.render("member/privacy");
 });
 
 module.exports = router;

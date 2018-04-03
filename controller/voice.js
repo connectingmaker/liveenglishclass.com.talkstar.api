@@ -11,6 +11,7 @@ var mecab = require('mecab-ya');
 
 router.get("/test", function(req, res) {
     var text = '사과가 영어로 뭐야?';
+    var text = '영어로 사과가 뭐야?';
     //var text = "한영사전에서 사과 찾아줘";
     text = text.replace(/ /g, '');
     //NNG+NKS - 매미가
@@ -44,7 +45,7 @@ router.get("/test", function(req, res) {
         */
     });
 
-    /*
+
     mecab.morphs(text, function (err, result) {
         console.log(result);
     });
@@ -52,7 +53,7 @@ router.get("/test", function(req, res) {
     mecab.nouns(text, function (err, result) {
         console.log(result);
     });
-    */
+
 
 });
 
