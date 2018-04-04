@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var crawling = require('./controller/crawling');
 var voice = require('./controller/voice');
 var member = require('./controller/member');
+var study = require('./controller/study');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/voice', voice);
 app.use('/member', member);
 app.use('/crawling', crawling);
+app.use('/study', study);
 
 process.on('uncaughtException', function(ex) {
   //console.log(ex);
