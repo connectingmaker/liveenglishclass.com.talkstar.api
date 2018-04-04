@@ -111,6 +111,26 @@ router.post("/userJoinSuccess", function(req, res) {
 
 });
 
+/********* 공지사항 *************************/
+router.get("/noticeList", function(req, res) {
+    // var notice_title = req.query.notice_title;
+    // var notice_content = req.query.notice_content;
+
+
+
+    mmember._sp_NOTICE_LIST(function(err, rows) {
+        var data = rows[0];
+
+        var json = {
+            err_code : "000"
+            ,data : data
+        }
+
+        res.send(json);
+    });
+
+});
+
 
 /********* 이용약관 *************************/
 router.get("/agree", function(req, res) {
