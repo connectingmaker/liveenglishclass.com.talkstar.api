@@ -10,6 +10,7 @@ var crawling = require('./controller/crawling');
 var voice = require('./controller/voice');
 var member = require('./controller/member');
 var study = require('./controller/study');
+var command = require('./controller/command');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/voice', voice);
 app.use('/member', member);
 app.use('/crawling', crawling);
 app.use('/study', study);
+app.use('/command', command);
 
 process.on('uncaughtException', function(ex) {
   //console.log(ex);
