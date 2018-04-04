@@ -32,6 +32,29 @@ router.post("/loginProcess", function(req, res) {
     });
 });
 
+/*************** 의견보내기 ******************/
+router.post("/qnaProcess",function(req,res) {
+    var uid = req.body.uid;
+    var question = req.body.question;
+
+    mmember._sp_MEMBER_QNA_SAVE(uid,question, function(err, rows) {
+        console.log(err);
+        try {
+            var data = rows[0][0];
+            var json = data;
+            console.log(json);
+
+            res.send(json);
+
+        } catch (e) {
+            var json = {
+                "ERR_CODE" : "999"
+                ,"ERR_MSG" : "DATA_ERR"
+            }
+            res.send(json);
+        }
+    });
+});
 
 /******** 회원가입 *********************************/
 router.post("/userJoinSuccess", function(req, res) {

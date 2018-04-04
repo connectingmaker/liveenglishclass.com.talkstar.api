@@ -43,6 +43,17 @@ var mmember = {
         connection.end();
         return data;
     }
+    ,_sp_MEMBER_QNA_SAVE: function(uid,question, callback) {
+        var connection = mysql_dbc.init();
+        var query = " call _sp_MEMBER_QNA_SAVE(?, ?) ";
+        var params = [];
+        params.push(uid);
+        params.push(question);
+
+        var data = connection.query(query, params, callback);
+        connection.end();
+        return data;
+    }
 }
 
 module.exports = mmember;
