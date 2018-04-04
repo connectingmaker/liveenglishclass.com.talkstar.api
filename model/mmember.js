@@ -54,6 +54,15 @@ var mmember = {
         connection.end();
         return data;
     }
+    ,_sp_NOTICE_LIST:function(callback){
+        var connection = mysql_dbc.init();
+        var query = " call _sp_NOTICE_LIST() ";
+        var params = [];
+
+        var data = connection.query(query, params, callback);
+        connection.end();
+        return data;
+    }
 }
 
 module.exports = mmember;
