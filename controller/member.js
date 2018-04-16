@@ -131,6 +131,27 @@ router.get("/noticeList", function(req, res) {
 
 });
 
+/********* 공지사항 내용*************************/
+router.get("/noticeContent", function(req, res) {
+    var seq = req.query.seq;
+    // var notice_content = req.query.notice_content;
+
+
+
+    mmember.sp_NOTICE_CONTENT(seq,function(err, rows) {
+        var data = rows[0];
+
+        var json = {
+            err_code : "000"
+            ,data : data
+        }
+        console.log(json);
+        res.render("member/noticeContent", {json : json});
+
+    });
+
+});
+
 
 /********* 이용약관 *************************/
 router.get("/agree", function(req, res) {

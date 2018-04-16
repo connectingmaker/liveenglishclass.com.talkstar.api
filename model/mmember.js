@@ -43,6 +43,7 @@ var mmember = {
         connection.end();
         return data;
     }
+
     ,_sp_MEMBER_QNA_SAVE: function(uid,question, callback) {
         var connection = mysql_dbc.init();
         var query = " call _sp_MEMBER_QNA_SAVE(?, ?) ";
@@ -58,6 +59,16 @@ var mmember = {
         var connection = mysql_dbc.init();
         var query = " call _sp_NOTICE_LIST() ";
         var params = [];
+
+        var data = connection.query(query, params, callback);
+        connection.end();
+        return data;
+    }
+    ,sp_NOTICE_CONTENT: function(seq,callback){
+        var connection = mysql_dbc.init();
+        var query = " call _sp_NOTICE_CONTENT(?) ";
+        var params = [];
+        params.push(seq);
 
         var data = connection.query(query, params, callback);
         connection.end();
