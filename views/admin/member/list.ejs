@@ -1,4 +1,4 @@
-<div class="page-container" style="min-height:667px">
+<div id="app" class="page-container" style="min-height:667px">
 
     <!-- Page content -->
     <div class="page-content">
@@ -67,6 +67,17 @@
 
                 <div class="table-responsive">
                     <table class="table">
+                        <col width="5%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="20%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="15%">
+
+
                         <thead>
                         <tr class="bg-blue">
                             <th>
@@ -77,18 +88,39 @@
                             <th>아이디(이메일)</th>
                             <th>휴대폰번호</th>
                             <th>비밀번호</th>
-                            <th>페이스북 연동</th>
-                            <th>카카오톡 연동</th>
+                            <th>FACEBOOK</th>
+                            <th>KAKAO</th>
                             <th>가입일</th>
                         </tr>
                         </thead>
-
+                        <tbody>
+                        <tr v-for="(item,index) in listData">
+                            <td></td>
+                            <td></td>
+                            <td>{{item.USERNAME}}</td>
+                            <td>{{item.USEREMAIL}}</td>
+                            <td>{{item.PHONE_NUMBER}}</td>
+                            <td>{{item.PWD}}</td>
+                            <td></td>
+                            <td></td>
+                            <td>{{item.INSERT_DATETIME}}</td>
+                        </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
             <!-- /single line -->
 
-
+            <div class="col-xs-12 text-center">
+            <ul class="pagination-flat pagination-sm twbs-visible-pages pagination">
+                <li class="prev disabled"><a href="#" class="page-link">←</a></li>
+                <li class="page active"><a href="#" class="page-link legitRipple">1</a></li>
+                <li class="page"><a href="#" class="page-link legitRipple">2</a></li>
+                <li class="page"><a href="#" class="page-link legitRipple">3</a></li>
+                <li class="page"><a href="#" class="page-link legitRipple">4</a></li>
+                <li class="next"><a href="#" class="page-link legitRipple">→</a></li>
+            </ul>
+            </div>
 
 
         </div>
