@@ -181,19 +181,6 @@
 
 <script src="/assets/js/vue.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="/assets/js/common.js?ver=<?=rand('0','9')?><?=rand('0','9')?><?=rand('0','9')?><?=rand('0','9')?><?=rand('0','9')?><?=rand('0','9')?>"></script>
-
-
-<?php if(count($add_script) != 0) { ?>
-<?php foreach($add_script as $key => $value) { ?>
-    <script src="<?=$value?>.js"></script>
-<?php } ?>
-<?php } ?>
-
-
-<?php if(count($script) != 0) { ?>
-<script src="<?=$script?>?ver=<?=rand('0','9')?><?=rand('0','9')?><?=rand('0','9')?><?=rand('0','9')?><?=rand('0','9')?><?=rand('0','9')?>"></script>
-<?php } ?>
 
 
 <!-- END PAGE LEVEL JS -->
