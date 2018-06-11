@@ -10,16 +10,8 @@ var madmin = require("../model/madmin");
 
 router.get("/member/list", function(req, res) {
     res.render('admin/member/list', {
-        layout: 'layout/admin_layout',
-        "layout extractScripts": true
     });
 });
-
-
-router.get('/memberList', function(req, res) {
-    res.render('admin/memberList', { });
-});
-
 
 
 
