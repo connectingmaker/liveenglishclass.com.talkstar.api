@@ -1,12 +1,11 @@
 var express = require('express');
-var expressLayouts = require('express-ejs-layouts');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var admin = require('./controller/admin');
+
 var crawling = require('./controller/crawling');
 var voice = require('./controller/voice');
 var member = require('./controller/member');

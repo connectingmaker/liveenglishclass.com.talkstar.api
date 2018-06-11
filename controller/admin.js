@@ -35,4 +35,13 @@ router.get("/member/list", function(req, res) {
 });
 
 
+/**** 브랜드 카테고리 대분류 VIEW *****************/
+router.get('/memberList', function(req, res) {
+
+    res.render('admin/memberList', { });
+});
+
+
+
+
 module.exports = router;
