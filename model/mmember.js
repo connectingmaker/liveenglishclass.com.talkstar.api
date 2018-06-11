@@ -74,6 +74,16 @@ var mmember = {
         connection.end();
         return data;
     }
+    ,_sp_MYPAGE: function(uid, callback) {
+        var connection = mysql_dbc.init();
+        var query = " call _sp_MYPAGE(?) ";
+        var params = [];
+        params.push(uid);
+
+        var data = connection.query(query, params, callback);
+        connection.end();
+        return data;
+    }
 }
 
 module.exports = mmember;

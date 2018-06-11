@@ -145,23 +145,43 @@ router.get("/noticeContent", function(req, res) {
             err_code : "000"
             ,data : data
         }
+
         console.log(json);
-        res.render("member/noticeContent", {json : json});
+
+        //res.render('admin/member/list', { layout: 'layout/single_layout', "layout extractScripts": true });
+        res.render("member/noticeContent", { layout: 'layout/single_layout', "layout extractScripts": true ,json : json });
 
     });
 
 });
 
 
+
+
 /********* 이용약관 *************************/
 router.get("/agree", function(req, res) {
-    res.render("member/agree");
+    res.render("member/agree",  { layout: 'layout/single_layout', "layout extractScripts": true });
 });
 
 
 /******** 개인정보 취급방침 ********************/
 router.get("/privacy", function(req, res) {
-    res.render("member/privacy");
+    res.render("member/privacy",  { layout: 'layout/single_layout', "layout extractScripts": true });
+});
+
+router.get("/mypage", function(req, res) {
+    var uid = req.query.uid;
+    console.log(uid);
+    mmember._sp_MYPAGE(uid, function(err, rows) {
+       if(err) {
+           console.log(err);
+       }
+
+       var data = rows[0][0];
+       console.log(data);
+
+       res.send(data);
+    });
 });
 
 module.exports = router;

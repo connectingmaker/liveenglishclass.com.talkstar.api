@@ -2,8 +2,8 @@
 <head>
     <style type="text/css">
         body { background-color: #ffffff;color: #444;}
-        div.title{ width:100%; background:#ffffff;position:static; font-weight: bold; font-size: 1em; margin-top: 1em; padding-left:10px; padding-bottom:10px; border-bottom: 2px solid #ccc;}
-        div.content{ width:100%; background:#ffffff;position:static; font-size: 0.9em; margin-top: 1em; padding-left:10px; }
+        div.title{ width:100%; background:#ffffff;position:static; font-weight: bold; font-size: 1.4em; margin-top: 1em; padding-left:10px; padding-bottom:10px; border-bottom: 1px solid #ccc;}
+        div.content{ width:100%; background:#ffffff;position:static; font-size: 1.2em; margin-top: 1em; padding-left:10px; }
     </style>
 
 </head>
@@ -15,7 +15,7 @@
     <title>공지사항</title>
 </head>
 
-<body>
+<body style="background-color: #fff; color:#404040;">
     <div class="title"><%=json.data[0].NOTICE_TITLE%></div>
     <div class="content"><%=json.data[0].NOTICE_CONTENT%></div>
 </body>

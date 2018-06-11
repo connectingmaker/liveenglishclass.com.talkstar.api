@@ -22,6 +22,29 @@ module.exports = (function () {
             password: 'fkdlqmdldrmffltl',
             database: 'english'
         }
+
+
+        // local: { // localhost
+        //     host: 'www.brs.kr',
+        //     port: '3306',
+        //     user: 'talkstar',
+        //     password: 'talkstar',
+        //     database: 'talkstar'
+        // },
+        // real: { // real server db info
+        //     host: 'www.brs.kr',
+        //     port: '3306',
+        //     user: 'talkstar',
+        //     password: 'talkstar',
+        //     database: 'talkstar'
+        // },
+        // dev: { // dev server db info
+        //     host: 'www.brs.kr',
+        //     port: '3306',
+        //     user: 'talkstar',
+        //     password: 'talkstar',
+        //     database: 'talkstar'
+        // }
     }
 
     /*

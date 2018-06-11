@@ -23,5 +23,25 @@ router.get("/list", function(req, res) {
 
 });
 
+router.get("/memberCommand", function(req, res) {
+
+    var uid = req.query.uid;
+    mcommand._sp_MEMBER_COMMAND_LIST(uid, function(err, rows) {
+        if(err) {
+            console.log(err);
+        }
+
+        var data = rows[0];
+
+        var json = {
+            data : data
+        };
+
+        console.log(json);
+
+        res.send(json);
+    });
+});
+
 
 module.exports = router;

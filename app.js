@@ -1,11 +1,12 @@
 var express = require('express');
+var expressLayouts = require('express-ejs-layouts');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-
+var admin = require('./controller/admin');
 var crawling = require('./controller/crawling');
 var voice = require('./controller/voice');
 var member = require('./controller/member');
@@ -18,6 +19,11 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.set('layout', 'layout/layout');
+app.set("layout extractScripts", true);
+app.use(expressLayouts);
+
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -26,6 +32,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use('/admin', admin);
 app.use('/voice', voice);
 app.use('/member', member);
 app.use('/crawling', crawling);
