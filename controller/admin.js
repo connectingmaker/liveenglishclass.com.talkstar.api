@@ -34,7 +34,7 @@ router.post("/loginProcess", function(req, res) {
         res.send(rows[0][0]);
     });
 });
-
+/*
 router.get("/member/list", function(req, res) {
     res.render('admin/member/list', {
         layout: 'layout/admin_layout',
@@ -46,7 +46,7 @@ router.get("/member/list", function(req, res) {
 router.get('/memberList', function(req, res) {
     res.render('admin/memberList', { });
 });
-
+*/
 
 
 
