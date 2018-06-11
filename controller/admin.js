@@ -8,6 +8,14 @@ var router = express.Router();
 
 var madmin = require("../model/madmin");
 
+router.get("/", function(req, res) {
+    res.render('admin/login', {
+        layout: 'layout/single_layout',
+        "layout extractScripts": true
+    });
+});
+
+
 router.get("/login", function(req, res) {
     res.render('admin/login', {
         layout: 'layout/single_layout',
@@ -35,9 +43,7 @@ router.get("/member/list", function(req, res) {
 });
 
 
-/**** 브랜드 카테고리 대분류 VIEW *****************/
 router.get('/memberList', function(req, res) {
-
     res.render('admin/memberList', { });
 });
 
