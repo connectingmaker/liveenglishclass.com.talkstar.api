@@ -47,7 +47,7 @@
             <!-- Single line -->
             <div class="panel panel-white">
                 <div class="panel-heading">
-                    <h6 class="panel-title">회원리스트</h6>
+                    <h6 class="panel-title">공지사항리스트</h6>
 
 
                 </div>
@@ -101,12 +101,7 @@
                     <table class="table">
                         <col width="5%">
                         <col width="10%">
-                        <col width="10%">
-                        <col width="20%">
-                        <col width="10%">
-                        <col width="10%">
-                        <col width="10%">
-                        <col width="10%">
+                        <col width="70%">
                         <col width="15%">
 
 
@@ -116,27 +111,12 @@
                                 <input type="checkbox">
                             </th>
                             <th>번호</th>
-                            <th>이름</th>
-                            <th>아이디(이메일)</th>
-                            <th>휴대폰번호</th>
-                            <th>비밀번호</th>
-                            <th>FACEBOOK</th>
-                            <th>KAKAO</th>
-                            <th>가입일</th>
+                            <th>제목</th>
+                            <th>등록일</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(item,index) in listData">
-                            <td><input type="checkbox"></td>
-                            <td>{{item.UID}}</td>
-                            <td>{{item.USERNAME}}</td>
-                            <td>{{item.USEREMAIL}}</td>
-                            <td>{{item.PHONE_NUMBER}}</td>
-                            <td>{{item.PWD}}</td>
-                            <td></td>
-                            <td></td>
-                            <td>{{item.INSERT_DATETIME.substring(0,10)}}</td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -144,18 +124,18 @@
             <!-- /single line -->
 
             <div class="col-xs-12 text-center">
-            <!--<ul class="pagination-flat pagination-sm twbs-visible-pages pagination">-->
+                <!--<ul class="pagination-flat pagination-sm twbs-visible-pages pagination">-->
                 <!--<li class="prev disabled"><a href="#" class="page-link">←</a></li>-->
                 <!--<li class="page active"><a href="#" class="page-link legitRipple">1</a></li>-->
                 <!--<li class="page"><a href="#" class="page-link legitRipple">2</a></li>-->
                 <!--<li class="page"><a href="#" class="page-link legitRipple">3</a></li>-->
                 <!--<li class="page"><a href="#" class="page-link legitRipple">4</a></li>-->
                 <!--<li class="next"><a href="#" class="page-link legitRipple">→</a></li>-->
-            <!--</ul>-->
+                <!--</ul>-->
 
                 <template>
                     <paginate
-                            :page-count="totalPage"
+                            :page-count="20"
                             :page-range="10"
                             :margin-pages="1"
                             :click-handler="clickCallback"
@@ -176,4 +156,4 @@
 
 </div>
 
-<script language="javascript" src="/view_js/admin/member/list.js"></script>
+<script language="javascript" src="/view_js/admin/notice/list.js"></script>

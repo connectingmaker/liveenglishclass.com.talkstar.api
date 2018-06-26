@@ -16,7 +16,7 @@ router.get("/list", function(req, res) {
 
         res.send(json);
     } else {
-        mstudy._sp_STUDY_LIST(uid, function(err, rows) {
+        mstudy._sp_STUDY_LIST_20180620(uid, function(err, rows) {
             var data = rows[0];
 
             var json = {
@@ -52,6 +52,7 @@ router.get("/start", function(req, res) {
     var classes_code = req.query.classes_code;
     var chapter_code = req.query.chapter_code;
 
+
     mstudy._sp_STUDY_START(uid, classes_code, chapter_code, function(err, rows) {
         if(err) {
             console.log(err);
@@ -65,6 +66,67 @@ router.get("/start", function(req, res) {
 
 
     });
+});
+
+router.get("/start_20180620", function(req, res) {
+    var uid = req.query.uid;
+    var classes_code = req.query.classes_code;
+    var chapter_code = req.query.chapter_code;
+    var orderId = req.query.orderId;
+    var studyCode = req.query.studyCode;
+    var questionAnswer = req.query.questionAnswer;
+
+    if(studyCode == undefined) {
+        studyCode = "";
+    }
+
+    if(questionAnswer == undefined) {
+        questionAnswer = "";
+    }
+
+    console.log(studyCode + "/// " + questionAnswer);
+
+    // orderId = 10;
+    mstudy._sp_STUDY_START_20180620(uid, classes_code, chapter_code, orderId, function(err, rows) {
+        if(err) {
+            console.log(err);
+        }
+
+        var data = rows[0][0];
+
+        if(studyCode != "" && questionAnswer != "") {
+            var temp = questionAnswer.split('///');
+            mstudy._sp_MEMBER_CLASSES_CHAPTER_STUDY_VOICE(uid, studyCode, temp[0], temp[1], temp[2], function(err, rows) {
+                if(err) {
+                    console.log(err);
+                }
+
+                res.send(data);
+            });
+        } else {
+            res.send(data);
+        }
+
+
+    });
+});
+
+router.get("/finish", function(req, res) {
+    var uid = req.query.uid;
+    var classes_code = req.query.classes_code;
+    var chapter_code = req.query.chapter_code;
+
+    mstudy._sp_STUDY_FINISH(uid, classes_code, chapter_code, function(err, rows) {
+        if(err) {
+            console.log(err);
+        }
+
+        var data = {
+            ERR_CODE : "000"
+        };
+
+        res.send(data);
+    })
 });
 
 router.get("/next", function(req, res) {
@@ -101,7 +163,6 @@ router.post("/next", function(req, res) {
     var chapter_code = req.query.chapter_code;
     var part_code = req.query.part_code;
     var orderid = req.query.orderid;
-
     var dataQ = req.body;
     var dataQ_length = Object.keys(dataQ).length;
 

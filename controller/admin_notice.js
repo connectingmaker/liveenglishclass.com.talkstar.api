@@ -6,22 +6,22 @@ var URL    = require('url');
 var express = require('express');
 var router = express.Router();
 
-var madmin_member = require("../model/madmin_member");
+var madmin_notice = require("../model/madmin_notice");
 
-router.get("/member/list", function(req, res) {
+router.get("/notice/list", function(req, res) {
 
-    res.render('admin/member/list', {});
+    res.render('admin/notice/list', {});
 });
 
-router.post("/member/listJson", function(req, res) {
-    var page = req.body.page;
-    var search_type = req.body.search_type;
-    var search_name = req.body.search_name;
 
-    madmin_member.adminMemberCount(search_type, search_name, function(err, rows) {
+router.post("/notice/listJson", function(req, res) {
+    var page = req.body.page;
+
+
+    madmin_notice.adminNoticeCount(function(err, rows) {
         var total = rows[0].TOTAL;
         total = Math.ceil(total / 20);
-        madmin_member._sp_ADMIN_MEMBER_LIST(page, search_type, search_name, function(err, rows) {
+        madmin_member._sp_ADMIN_NOTICE_LIST(page, function(err, rows) {
             var list = rows[0];
             var jsonData = {
                 total : total
@@ -33,6 +33,5 @@ router.post("/member/listJson", function(req, res) {
     });
 
 });
-
 
 module.exports = router;

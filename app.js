@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 
 var admin = require('./controller/admin');
 var admin_member = require('./controller/admin_member');
+var admin_notice = require('./controller/admin_notice');
 
 
 var crawling = require('./controller/crawling');
@@ -39,6 +40,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', admin);
 app.use('/admin', admin_member);
+app.use('/admin', admin_notice);
+
+
 app.use('/voice', voice);
 app.use('/member', member);
 app.use('/crawling', crawling);

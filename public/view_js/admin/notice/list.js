@@ -20,12 +20,14 @@ var app = new Vue({
             var _this = this;
             _this.loading = true;
             common.loading.start("app");
-            common.ajax.send('/admin/member/listJson', json);
+            common.ajax.send('/admin/notice/listJson', json);
             common.ajax.return = function(data) {
+                console.log(data);
                 _this.listData = data.list;
                 _this.loading = false;
                 _this.totalPage = data.total;
                 common.loading.end("app");
+
 
 
 
