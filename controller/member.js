@@ -207,30 +207,41 @@ router.get("/privacy", function(req, res) {
 /*************** 마이페이지 ***********************/
 router.get("/mypage", function(req, res) {
     var uid = req.query.uid;
-    console.log(uid);
 
     mmember._sp_MYPAGE_RESULT_ALL(uid, function(err, rows) {
-
-       var star_count = rows[0].STAR_COUNT;
+        if(err) {
+            console.log(err);
+        }
+       var star_count = rows[0][0].STAR_COUNT;
        star_count = Math.ceil(star_count);
-       var star_all = rows[0].STAR_ALL;
-       star_all = Math.ceil(star_all);
-       var per = Math.round(star_count/star_all*100,0);
+       // var star_all = rows[0].STAR_ALL;
+       // star_all = Math.ceil(star_all);
+       var per = Math.round(rows[0][0].PER,0);
 
-       mmember._sp_MYPAGE_RESULT_YESTERDAY(uid, function(err, rows) {
-            var star_count_yesterday = rows[0];
+       mmember._sp_MYPAGE_RESULT_YESTERDAY2(uid, function(err, rows) {
+           if(err) {
+               console.log(err);
+           }
+           var star_count_yesterday2 = rows[0][0].STAR_COUNT_YESTERDAY2;
 
-            mmember._sp_MYPAGE_RESULT_TODAY(uid, function(err, rows) {
-                var star_count_today = rows[0];
-                var jsonData={
-                    star_count : star_count
-                    ,per :per
-                    ,star_count_yesterday :star_count_yesterday
-                    ,star_count_today : star_count_today
-                };
-                res.send(jsonData);
+           mmember._sp_MYPAGE_RESULT_YESTERDAY(uid, function(err, rows) {
+                var star_count_yesterday = rows[0][0].STAR_COUNT_YESTERDAY;
+
+                console.log(star_count_yesterday);
+
+                mmember._sp_MYPAGE_RESULT_TODAY(uid, function(err, rows) {
+                    var star_count_today = rows[0][0].STAR_COUNT_TODAY;
+                    var jsonData={
+                        STAR_COUNT : star_count
+                        ,PER :per
+                        ,STAR_COUNT_YESTERDAY :star_count_yesterday
+                        ,STAR_COUNT_YESTERDAY2 :star_count_yesterday2
+                        ,STAR_COUNT_TODAY : star_count_today
+                    };
+                    res.send(jsonData);
+                });
             });
-        });
+       });
     });
 
 });
