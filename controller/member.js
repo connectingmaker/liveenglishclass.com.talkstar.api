@@ -223,9 +223,11 @@ router.get("/mypage", function(req, res) {
                console.log(err);
            }
            var star_count_yesterday2 = rows[0][0].STAR_COUNT_YESTERDAY2;
+           star_count_yesterday2 = Math.ceil(star_count_yesterday2);
 
            mmember._sp_MYPAGE_RESULT_YESTERDAY(uid, function(err, rows) {
                 var star_count_yesterday = rows[0][0].STAR_COUNT_YESTERDAY;
+                star_count_yesterday = Math.ceil(star_count_yesterday);
 
                 console.log(star_count_yesterday);
 
