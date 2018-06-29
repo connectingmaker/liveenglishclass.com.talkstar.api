@@ -68,6 +68,26 @@ router.get("/start", function(req, res) {
     });
 });
 
+router.get("/prev", function(req, res) {
+    var uid = req.query.uid;
+    var classes_code = req.query.classes_code;
+    var chapter_code = req.query.chapter_code;
+    var orderId = req.query.orderId;
+
+
+
+    mstudy._sp_STUDY_PREV(uid, classes_code, chapter_code, orderId, function(err, rows) {
+        if(err) {
+            console.log(err);
+        }
+
+        var data = rows[0][0];
+
+        res.send(data);
+
+    });
+});
+
 router.get("/start_20180620", function(req, res) {
     var uid = req.query.uid;
     var classes_code = req.query.classes_code;
@@ -108,6 +128,44 @@ router.get("/start_20180620", function(req, res) {
         }
 
 
+    });
+});
+
+router.get("/bookmark", function(req, res) {
+    var uid = req.query.uid;
+    var study_code = req.query.study_code;
+
+
+    mstudy._sp_MEMBER_CLASSES_CHAPTER_STUDY_BOOKMARK(uid, study_code, function(err, rows) {
+        if(err) {
+            console.log(err);
+        }
+
+        var data = rows[0][0];
+
+        res.send(data);
+    });
+
+});
+
+router.get("/bookmarklist", function(req, res) {
+    var uid = req.query.uid;
+
+
+    mstudy._sp_MEMBER_CLASSES_CHAPTER_STUDY_BOOKMARK_LIST(uid, function(err, rows) {
+        if(err) {
+            console.log(err);
+        }
+
+        var data = rows[0];
+
+        var json = {
+            data : data
+        };
+
+        console.log(json);
+
+        res.send(json);
     });
 });
 

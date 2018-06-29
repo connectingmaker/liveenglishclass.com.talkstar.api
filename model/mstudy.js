@@ -49,6 +49,19 @@ var mstudy = {
         connection.end();
         return data;
     }
+    ,_sp_STUDY_PREV: function(uid, classes_code, chapter_code, orderId, callback) {
+        var connection = mysql_dbc.init();
+        var query = " call _sp_STUDY_PREV(?, ?, ?, ?) ";
+        var params = [];
+        params.push(uid);
+        params.push(classes_code);
+        params.push(chapter_code);
+        params.push(orderId);
+
+        var data = connection.query(query, params, callback);
+        connection.end();
+        return data;
+    }
     ,_sp_STUDY_START_20180620: function(uid, classes_code, chapter_code, orderId, callback) {
         var connection = mysql_dbc.init();
         var query = " call _sp_STUDY_START_20180620(?, ?, ?, ?) ";
@@ -57,6 +70,27 @@ var mstudy = {
         params.push(classes_code);
         params.push(chapter_code);
         params.push(orderId);
+
+        var data = connection.query(query, params, callback);
+        connection.end();
+        return data;
+    }
+    ,_sp_MEMBER_CLASSES_CHAPTER_STUDY_BOOKMARK: function(uid, study_code, callback) {
+        var connection = mysql_dbc.init();
+        var query = " call _sp_MEMBER_CLASSES_CHAPTER_STUDY_BOOKMARK(?, ?) ";
+        var params = [];
+        params.push(uid);
+        params.push(study_code);
+
+        var data = connection.query(query, params, callback);
+        connection.end();
+        return data;
+    }
+    ,_sp_MEMBER_CLASSES_CHAPTER_STUDY_BOOKMARK_LIST: function(uid, callback) {
+        var connection = mysql_dbc.init();
+        var query = " call _sp_MEMBER_CLASSES_CHAPTER_STUDY_BOOKMARK_LIST(?) ";
+        var params = [];
+        params.push(uid);
 
         var data = connection.query(query, params, callback);
         connection.end();
