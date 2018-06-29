@@ -84,6 +84,36 @@ var mmember = {
         connection.end();
         return data;
     }
+    ,_sp_MYPAGE_RESULT_ALL: function(uid, callback) {
+        var connection = mysql_dbc.init();
+        var query = " call _sp_MYPAGE_RESULT_ALL(?) ";
+        var params = [];
+        params.push(uid);
+
+        var data = connection.query(query, params, callback);
+        connection.end();
+        return data;
+    }
+    ,_sp_MYPAGE_RESULT_TODAY: function(uid, callback) {
+        var connection = mysql_dbc.init();
+        var query = " call _sp_MYPAGE_RESULT_TODAY(?) ";
+        var params = [];
+        params.push(uid);
+
+        var data = connection.query(query, params, callback);
+        connection.end();
+        return data;
+    }
+    ,_sp_MYPAGE_RESULT_YESTERDAY: function(uid, callback) {
+        var connection = mysql_dbc.init();
+        var query = " call _sp_MYPAGE_RESULT_YESTERDAY(?) ";
+        var params = [];
+        params.push(uid);
+
+        var data = connection.query(query, params, callback);
+        connection.end();
+        return data;
+    }
 }
 
 module.exports = mmember;

@@ -6,6 +6,7 @@ var router = express.Router();
 
 
 var mmember = require("../model/mmember");
+var mcommand = require("../model/mcommand");
 
 
 /******* 로그인 ********************************/
@@ -154,8 +155,42 @@ router.get("/noticeContent", function(req, res) {
     });
 
 });
+/********* 명령어 *************************/
+router.get("/list", function(req, res) {
 
 
+    mcommand._sp_COMMAND_LIST(function(err, rows) {
+        var data = rows[0];
+
+        var json = {
+            err_code : "000"
+            ,data : data
+        }
+
+        res.send(json);
+    });
+
+});
+/********* 명령어 내용*************************/
+router.get("/memberCommand", function(req, res) {
+    var uid = req.query.uid;
+    mcommand._sp_MEMBER_COMMAND_LIST(uid, function(err, rows) {
+        if(err) {
+            console.log(err);
+        }
+
+        var data = rows[0];
+
+        var json = {
+            data : data
+        };
+
+        console.log(json);
+
+        res.send(json);
+    });
+
+});
 
 
 /********* 이용약관 *************************/
@@ -169,19 +204,35 @@ router.get("/privacy", function(req, res) {
     res.render("member/privacy",  { layout: 'layout/single_layout', "layout extractScripts": true });
 });
 
+/*************** 마이페이지 ***********************/
 router.get("/mypage", function(req, res) {
     var uid = req.query.uid;
     console.log(uid);
-    mmember._sp_MYPAGE(uid, function(err, rows) {
-       if(err) {
-           console.log(err);
-       }
 
-       var data = rows[0][0];
-       console.log(data);
+    mmember._sp_MYPAGE_RESULT_ALL(uid, function(err, rows) {
 
-       res.send(data);
+       var star_count = rows[0].STAR_COUNT;
+       star_count = Math.ceil(star_count);
+       var star_all = rows[0].STAR_ALL;
+       star_all = Math.ceil(star_all);
+       var per = Math.round(star_count/star_all*100,0);
+
+       mmember._sp_MYPAGE_RESULT_YESTERDAY(uid, function(err, rows) {
+            var star_count_yesterday = rows[0];
+
+            mmember._sp_MYPAGE_RESULT_TODAY(uid, function(err, rows) {
+                var star_count_today = rows[0];
+                var jsonData={
+                    star_count : star_count
+                    ,per :per
+                    ,star_count_yesterday :star_count_yesterday
+                    ,star_count_today : star_count_today
+                };
+                res.send(jsonData);
+            });
+        });
     });
+
 });
 
 module.exports = router;
