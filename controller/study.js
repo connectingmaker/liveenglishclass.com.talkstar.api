@@ -47,6 +47,17 @@ router.get("/chapter", function(req, res) {
     });
 });
 
+router.get("/commandRandom", function(req, res) {
+    mstudy._sp_COMMAND_RANDOM(function(err, rows) {
+        if(err) {
+            console.log(err);
+        }
+        var data = rows[0][0];
+
+        res.send(data);
+    });
+});
+
 router.get("/start", function(req, res) {
     var uid = req.query.uid;
     var classes_code = req.query.classes_code;
