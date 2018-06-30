@@ -1,5 +1,5 @@
 var express = require('express');
-var expressLayouts = require('express-layouts');
+//var expressLayouts = require('express-layouts');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -26,7 +26,7 @@ app.set('view engine', 'ejs');
 
 app.set('layout', 'layout/layout');
 app.set("layout extractScripts", true);
-app.use(expressLayouts);
+//app.use(expressLayouts);
 
 
 // uncomment after placing your favicon in /public

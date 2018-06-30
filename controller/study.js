@@ -73,19 +73,36 @@ router.get("/prev", function(req, res) {
     var classes_code = req.query.classes_code;
     var chapter_code = req.query.chapter_code;
     var orderId = req.query.orderId;
+    var bookmarkYN_check = req.query.bookmarkYN_check;
+
+
+    if(bookmarkYN_check == "Y") {
+
+        mstudy._sp_STUDY_BOOKMARK(uid, classes_code, chapter_code, orderId, function(err, rows) {
+            if(err) {
+                console.log(err);
+            }
+
+            var data = rows[0][0];
+
+            res.send(data);
+
+        });
 
 
 
-    mstudy._sp_STUDY_PREV(uid, classes_code, chapter_code, orderId, function(err, rows) {
-        if(err) {
-            console.log(err);
-        }
+    } else {
+        mstudy._sp_STUDY_PREV(uid, classes_code, chapter_code, orderId, function (err, rows) {
+            if (err) {
+                console.log(err);
+            }
 
-        var data = rows[0][0];
+            var data = rows[0][0];
 
-        res.send(data);
+            res.send(data);
 
-    });
+        });
+    }
 });
 
 router.get("/start_20180620", function(req, res) {
@@ -95,6 +112,11 @@ router.get("/start_20180620", function(req, res) {
     var orderId = req.query.orderId;
     var studyCode = req.query.studyCode;
     var questionAnswer = req.query.questionAnswer;
+    var bookmarkYN_check = req.query.bookmarkYN_check;
+
+    if(bookmarkYN_check == undefined) {
+        bookmarkYN_check = "N";
+    }
 
     if(studyCode == undefined) {
         studyCode = "";
@@ -104,31 +126,59 @@ router.get("/start_20180620", function(req, res) {
         questionAnswer = "";
     }
 
-    console.log(studyCode + "/// " + questionAnswer);
+    //console.log(studyCode + "/// " + questionAnswer);
 
-    // orderId = 10;
-    mstudy._sp_STUDY_START_20180620(uid, classes_code, chapter_code, orderId, function(err, rows) {
-        if(err) {
-            console.log(err);
-        }
+    if(bookmarkYN_check == "Y") {
+        mstudy._sp_STUDY_BOOKMARK(uid, classes_code, chapter_code, orderId, function(err, rows) {
+            if(err) {
+                console.log(err);
+            }
 
-        var data = rows[0][0];
+            var data = rows[0][0];
 
-        if(studyCode != "" && questionAnswer != "") {
-            var temp = questionAnswer.split('///');
-            mstudy._sp_MEMBER_CLASSES_CHAPTER_STUDY_VOICE(uid, studyCode, temp[0], temp[1], temp[2], function(err, rows) {
-                if(err) {
-                    console.log(err);
-                }
+            if(studyCode != "" && questionAnswer != "") {
+                var temp = questionAnswer.split('///');
+                mstudy._sp_MEMBER_CLASSES_CHAPTER_STUDY_VOICE(uid, studyCode, temp[0], temp[1], temp[2], function(err, rows) {
+                    if(err) {
+                        console.log(err);
+                    }
 
+                    res.send(data);
+                });
+            } else {
                 res.send(data);
-            });
-        } else {
-            res.send(data);
-        }
+            }
 
 
-    });
+
+
+        });
+    } else {
+        mstudy._sp_STUDY_START_20180620(uid, classes_code, chapter_code, orderId, function(err, rows) {
+            if(err) {
+                console.log(err);
+            }
+
+            var data = rows[0][0];
+
+            if(studyCode != "" && questionAnswer != "") {
+                var temp = questionAnswer.split('///');
+                mstudy._sp_MEMBER_CLASSES_CHAPTER_STUDY_VOICE(uid, studyCode, temp[0], temp[1], temp[2], function(err, rows) {
+                    if(err) {
+                        console.log(err);
+                    }
+
+                    res.send(data);
+                });
+            } else {
+                res.send(data);
+            }
+
+
+        });
+    }
+
+
 });
 
 router.get("/bookmark", function(req, res) {

@@ -62,6 +62,19 @@ var mstudy = {
         connection.end();
         return data;
     }
+    ,_sp_STUDY_BOOKMARK: function(uid, classes_code, chapter_code, orderId, callback) {
+        var connection = mysql_dbc.init();
+        var query = " call _sp_STUDY_BOOKMARK(?, ?, ?, ?) ";
+        var params = [];
+        params.push(uid);
+        params.push(classes_code);
+        params.push(chapter_code);
+        params.push(orderId);
+
+        var data = connection.query(query, params, callback);
+        connection.end();
+        return data;
+    }
     ,_sp_STUDY_START_20180620: function(uid, classes_code, chapter_code, orderId, callback) {
         var connection = mysql_dbc.init();
         var query = " call _sp_STUDY_START_20180620(?, ?, ?, ?) ";
