@@ -214,12 +214,13 @@ router.get("/mypage", function(req, res) {
          }
 
          var data = rows[0][0];
-
+         console.log(data);
          res.send(data);
      });
 });
 
 router.get("/studyfinishresult", function(req, res) {
+    var uid = req.query.uid;
     var classesCode = req.query.classesCode;
     var chapterCode = req.query.chapterCode;
 
