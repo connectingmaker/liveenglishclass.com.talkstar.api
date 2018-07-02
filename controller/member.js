@@ -229,7 +229,7 @@ router.get("/mypage", function(req, res) {
                 var star_count_yesterday = rows[0][0].STAR_COUNT_YESTERDAY;
                 star_count_yesterday = Math.ceil(star_count_yesterday);
 
-                console.log(star_count_yesterday);
+                //console.log(star_count_yesterday);
 
                 mmember._sp_MYPAGE_RESULT_TODAY(uid, function(err, rows) {
                     var star_count_today = rows[0][0].STAR_COUNT_TODAY;
@@ -238,7 +238,7 @@ router.get("/mypage", function(req, res) {
                         ,PER :per
                         ,STAR_COUNT_YESTERDAY :star_count_yesterday
                         ,STAR_COUNT_YESTERDAY2 :star_count_yesterday2
-                        ,STAR_COUNT_TODAY : star_count_today
+                        ,STAR_COUNT_TODAY : Math.round(star_count_today)
                     };
                     res.send(jsonData);
                 });
