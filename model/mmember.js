@@ -124,6 +124,16 @@ var mmember = {
         connection.end();
         return data;
     }
+    ,_sp_MYPAGE_RESULT_NOW: function(classesCode, chapterCode, callback) {
+        var connection = mysql_dbc.init();
+        var query = " call _sp_MYPAGE_RESULT_NOW(?,?) ";
+        var params = [];
+        params.push(classesCode, chapterCode);
+
+        var data = connection.query(query, params, callback);
+        connection.end();
+        return data;
+    }
 }
 
 module.exports = mmember;
