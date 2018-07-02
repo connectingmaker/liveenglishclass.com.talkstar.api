@@ -208,44 +208,15 @@ router.get("/privacy", function(req, res) {
 router.get("/mypage", function(req, res) {
     var uid = req.query.uid;
 
-    mmember._sp_MYPAGE_RESULT_ALL(uid, function(err, rows) {
-        if(err) {
-            console.log(err);
-        }
-       var star_count = rows[0][0].STAR_COUNT;
-       star_count = Math.ceil(star_count);
-       // var star_all = rows[0].STAR_ALL;
-       // star_all = Math.ceil(star_all);
-       var per = Math.round(rows[0][0].PER,0);
+     mmember._sp_MYPAGE(uid, function(err, rows) {
+         if(err) {
+             console.log(err);
+         }
 
-       mmember._sp_MYPAGE_RESULT_YESTERDAY2(uid, function(err, rows) {
-           if(err) {
-               console.log(err);
-           }
-           var star_count_yesterday2 = rows[0][0].STAR_COUNT_YESTERDAY2;
-           star_count_yesterday2 = Math.ceil(star_count_yesterday2);
+         var data = rows[0][0];
 
-           mmember._sp_MYPAGE_RESULT_YESTERDAY(uid, function(err, rows) {
-                var star_count_yesterday = rows[0][0].STAR_COUNT_YESTERDAY;
-                star_count_yesterday = Math.ceil(star_count_yesterday);
-
-                //console.log(star_count_yesterday);
-
-                mmember._sp_MYPAGE_RESULT_TODAY(uid, function(err, rows) {
-                    var star_count_today = rows[0][0].STAR_COUNT_TODAY;
-                    var jsonData={
-                        STAR_COUNT : star_count
-                        ,PER :per
-                        ,STAR_COUNT_YESTERDAY :star_count_yesterday
-                        ,STAR_COUNT_YESTERDAY2 :star_count_yesterday2
-                        ,STAR_COUNT_TODAY : Math.round(star_count_today)
-                    };
-                    res.send(jsonData);
-                });
-            });
-       });
-    });
-
+         res.send(data);
+     });
 });
 
 router.get("/studyfinishresult", function(req, res) {
@@ -254,11 +225,48 @@ router.get("/studyfinishresult", function(req, res) {
 
     mmember._sp_MYPAGE_RESULT_NOW(classesCode, chapterCode,function(err, rows) {
         var star_count_now = rows[0][0].STAR_COUNT_NOW;
-        var jsonData={
 
-            STAR_COUNT_NOW : star_count_now
-        };
-        res.send(jsonData);
+        console.log(star_count_now);
+
+
+        mmember._sp_MYPAGE_RESULT_ALL(uid, function(err, rows) {
+            if(err) {
+                console.log(err);
+            }
+            var star_count = rows[0][0].STAR_COUNT;
+            star_count = Math.ceil(star_count);
+            // var star_all = rows[0].STAR_ALL;
+            // star_all = Math.ceil(star_all);
+            var per = Math.round(rows[0][0].PER,0);
+
+            mmember._sp_MYPAGE_RESULT_YESTERDAY2(uid, function(err, rows) {
+                if(err) {
+                    console.log(err);
+                }
+                var star_count_yesterday2 = rows[0][0].STAR_COUNT_YESTERDAY2;
+                star_count_yesterday2 = Math.ceil(star_count_yesterday2);
+
+                mmember._sp_MYPAGE_RESULT_YESTERDAY(uid, function(err, rows) {
+                    var star_count_yesterday = rows[0][0].STAR_COUNT_YESTERDAY;
+                    star_count_yesterday = Math.ceil(star_count_yesterday);
+
+                    //console.log(star_count_yesterday);
+
+                    mmember._sp_MYPAGE_RESULT_TODAY(uid, function(err, rows) {
+                        var star_count_today = rows[0][0].STAR_COUNT_TODAY;
+                        var jsonData={
+                            STAR_COUNT : star_count
+                            ,PER :per
+                            ,STAR_COUNT_YESTERDAY :star_count_yesterday
+                            ,STAR_COUNT_YESTERDAY2 :star_count_yesterday2
+                            ,STAR_COUNT_TODAY : Math.round(star_count_today)
+                            ,STAR_COUNT_NOW : star_count_now
+                        };
+                        res.send(jsonData);
+                    });
+                });
+            });
+        });
     });
 
 
