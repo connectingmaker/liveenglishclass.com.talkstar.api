@@ -248,4 +248,20 @@ router.get("/mypage", function(req, res) {
 
 });
 
+router.get("/studyfinishresult", function(req, res) {
+    var classesCode = req.query.classesCode;
+    var chapterCode = req.query.chapterCode;
+
+    mmember._sp_MYPAGE_RESULT_NOW(classesCode, chapterCode,function(err, rows) {
+        var star_count_now = rows[0][0].STAR_COUNT_NOW;
+        var jsonData={
+
+            STAR_COUNT_NOW : star_count_now
+        };
+        res.send(jsonData);
+    });
+
+
+});
+
 module.exports = router;
