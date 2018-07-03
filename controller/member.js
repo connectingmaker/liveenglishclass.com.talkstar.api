@@ -214,8 +214,36 @@ router.get("/mypage", function(req, res) {
          }
 
          var data = rows[0][0];
-         console.log(data);
-         res.send(data);
+         mmember._sp_MYPAGE_STUDY_HISTORY(uid, function(err, rows) {
+            if(err) {
+                console.log(err);
+            }
+
+            var list = rows[0];
+
+            var json = {
+                "CLASSES_CODE" : data.CLASSES_CODE
+                ,"CHAPTER_CODE" : data.CHAPTER_CODE
+                ,"CLASSES_NAME" : data.CLASSES_NAME
+                ,"CHAPTER_NAME" : data.CHAPTER_NAME
+                ,"SENTENCE" : data.SENTENCE
+                ,"LEARNING_NOTES" : data.LEARNING_NOTES
+                ,"CHAPTER_ALL" : data.CHAPTER_ALL
+                ,"USER_CHAPTER_COMPLATE" : data.USER_CHAPTER_COMPLATE
+                ,"STUDY_CNT" : data.STUDY_CNT
+                ,"QUESTION_CNT" : data.QUESTION_CNT
+                ,"USER_QUESTION_CNT" : data.USER_QUESTION_CNT
+                ,"PER" : data.PER
+                ,"list" : list
+            }
+
+            console.log(json);
+
+            res.send(json);
+
+         });
+
+
      });
 });
 
