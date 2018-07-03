@@ -226,6 +226,11 @@ router.get("/studyfinishresult", function(req, res) {
 
     mmember._sp_MYPAGE_RESULT_NOW(classesCode, chapterCode,function(err, rows) {
         var star_count_now = rows[0][0].STAR_COUNT_NOW;
+        var class_code = rows[0][0].CLASSES_CODE;
+        var chapter_code = rows[0][0].CHAPTER_CODE;
+        var classes_name = rows[0][0].CLASSES_NAME;
+        var chapter_name = rows[0][0].CHAPTER_NAME;
+        var learning_notes = rows[0][0].LEARNING_NOTES;
 
         console.log(star_count_now);
 
@@ -262,6 +267,11 @@ router.get("/studyfinishresult", function(req, res) {
                             ,STAR_COUNT_YESTERDAY2 :star_count_yesterday2
                             ,STAR_COUNT_TODAY : Math.round(star_count_today)
                             ,STAR_COUNT_NOW : star_count_now
+                            ,CLASSES_CODE : class_code
+                            ,CHAPTER_CODE : chapter_code
+                            ,CLASSES_NAME : classes_name
+                            ,CHAPTER_NAME : chapter_name
+                            ,LEARNING_NOTES : learning_notes
                         };
                         res.send(jsonData);
                     });
